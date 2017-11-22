@@ -214,6 +214,7 @@ public class admin extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
        if (evt.getClickCount() == 2) {
+           
             int index = jTable1.getSelectedRow();
             System.out.println("double clicked");
             System.out.println(index);
@@ -222,7 +223,9 @@ public class admin extends javax.swing.JFrame {
             try {
           Connection con = ConnectionBuilder.getConnection();
           Statement stm = con.createStatement();
-            stm.executeUpdate("DELETE FROM Menu WHERE menu_id = '"+idtd+"';");
+            stm.executeUpdate("DELETE foodname,price FROM Menu WHERE menu_id = '"+idtd+"';");
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.fireTableDataChanged();
             stm.close();
             con.close();
             System.out.println("Finnish");

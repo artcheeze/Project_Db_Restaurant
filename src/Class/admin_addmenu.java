@@ -67,13 +67,13 @@ public class admin_addmenu extends javax.swing.JFrame {
         jLabel4.setText("Price :");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/b3.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login/b3.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 130, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/add menu.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -102,6 +102,7 @@ public class admin_addmenu extends javax.swing.JFrame {
             }
       
             stm.executeUpdate("INSERT INTO Menu(Menu_id,foodname,price) VALUES ('"+id.getText()+"','"+n.getText()+"','"+p.getText()+"')");
+            
             stm.close();
             con.close();
             System.out.println("Finnish");
