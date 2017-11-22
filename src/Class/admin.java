@@ -32,13 +32,14 @@ public class admin extends javax.swing.JFrame {
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("Select * From Menu");
            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            Object rowData[] = new Object[8];
+            Object rowData[] = new Object[3];
             while (rs.next()) {
                 rowData[0] = rs.getInt("menu_id");
                 rowData[1] = rs.getString("foodname");
-                rowData[3] = rs.getFloat("price");
+                rowData[2] = rs.getFloat("price");
                 model.addRow(rowData);
             }
+            util.addFood("asdasd",215);
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -47,7 +48,7 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-            util.addFood("adasd", 1245);
+           
     }
 
     /**
@@ -77,10 +78,7 @@ public class admin extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Price"
@@ -94,7 +92,6 @@ public class admin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setMaximumSize(null);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
