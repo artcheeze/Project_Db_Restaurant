@@ -26,6 +26,7 @@ public class admin extends javax.swing.JFrame {
     public admin() {
         
         initComponents();
+        //-----------------------------------------------------------------------------------------------------------------
             Connection con;
         try {
             con = ConnectionBuilder.getConnection();
@@ -39,7 +40,7 @@ public class admin extends javax.swing.JFrame {
                 rowData[2] = rs.getFloat("price");
                 model.addRow(rowData);
             }
-            util.addFood("asdasd",215);
+            
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -48,7 +49,32 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+        //-----------------------------------------------------------------------------------------------------------------
+         try {
+            con = ConnectionBuilder.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("Select * From Employee");
+           DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            Object rowData[] = new Object[7];
+            while (rs.next()) {
+                rowData[0] = rs.getInt("emp_id");
+                rowData[1] = rs.getString("name");
+                rowData[2] = rs.getString("address");
+                 rowData[3] = rs.getString("email");
+                  rowData[4] = rs.getInt("phone");
+                   rowData[5] = rs.getString("username");
+                    rowData[6] = rs.getString("password");
+                model.addRow(rowData);
+            }
+            
+            stm.close();
+            con.close();
+            System.out.println("Finnish");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -74,6 +100,11 @@ public class admin extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/B_add.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,24 +133,39 @@ public class admin extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Address", "Email", "PhoneNo", "Username", "Password"
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 340, 440));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(4).setResizable(false);
+            jTable3.getColumnModel().getColumn(5).setResizable(false);
+            jTable3.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 370, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/home.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        admin_addmenu am = new admin_addmenu();
+        am.setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
