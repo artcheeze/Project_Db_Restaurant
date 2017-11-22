@@ -26,9 +26,14 @@ import javax.swing.border.EmptyBorder;
  * @author ART
  */
 public class util extends JPanel {
+public static int tempID;
 
-
-    
+public static void setTI(int e){
+    util.tempID = e;
+}   
+public static int getTI(){
+    return util.tempID; 
+}  
     
     
     

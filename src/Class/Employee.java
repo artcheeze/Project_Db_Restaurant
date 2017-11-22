@@ -145,6 +145,7 @@ public class Employee extends javax.swing.JFrame {
             System.out.println("double clicked");
             System.out.println(index);
             int id = (int) jTable1.getValueAt(index, 0);
+            util.setTI(id);
             emp_popup ep = new emp_popup();
             ep.setVisible(true);
             

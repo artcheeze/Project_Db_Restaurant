@@ -5,9 +5,13 @@
  */
 package Class;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +25,33 @@ public class emp_popup extends javax.swing.JFrame {
     public emp_popup() {
         initComponents();
         
+          Connection con;
+          System.out.println(util.getTI());
+        try {
+            con = ConnectionBuilder.getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("Select od.indexs,od.order_id,m.price From Orders_detail od "
+                    + " Join Menu m on m.menu_id = od.menu_id "
+                    + " where order_id ="+util.getTI()+"");
+           DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object rowData[] = new Object[3];
+            while (rs.next()) {
+                 rowData[0] = rs.getInt("indexs");
+                rowData[1] = rs.getInt("order_id");
+                rowData[2] = rs.getString("price");
+               
+                model.addRow(rowData);
+            }
+            
+            stm.close();
+            con.close();
+            System.out.println("Finnish");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         this.setLocationRelativeTo(null);
     }
 
@@ -35,6 +66,7 @@ public class emp_popup extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        b = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,32 +74,65 @@ public class emp_popup extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "OrderID", "Foodname", "Time"
+                "Index", "OrderID", "Foodname", "Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 80, 510, 310));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 80, 510, 240));
+
+        b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.png"))); // NOI18N
+        b.setText("jLabel3");
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bMouseClicked(evt);
+            }
+        });
+        getContentPane().add(b, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 40, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/emp_manger/รายละเอียดเมนู.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         if (evt.getClickCount() == 2) {
+            int index = jTable1.getSelectedRow();
+            System.out.println("double clicked");
+            System.out.println(index);
+            int id = (int) jTable1.getValueAt(index, 0);
+            String fn = (String) jTable1.getValueAt(index, 1);
+            String t = (String) jTable1.getValueAt(index, 2);
+            
+           
+            
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void bMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bMouseClicked
+        Employee l;
+        l = new Employee();
+        l.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_bMouseClicked
 
     /**
      * @param args the command line arguments
@@ -105,6 +170,7 @@ public class emp_popup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel b;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
