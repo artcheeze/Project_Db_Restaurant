@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +25,9 @@ public class admin extends javax.swing.JFrame {
      * Creates new form admin
      */
     public admin() {
-        
+          
         initComponents();
+        this.setLocationRelativeTo(null);
         //-----------------------------------------------------------------------------------------------------------------
             Connection con;
         try {
@@ -91,11 +93,14 @@ public class admin extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        b = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(null);
-        setPreferredSize(new java.awt.Dimension(800, 629));
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,13 +128,18 @@ public class admin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 137, 370, 420));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, 390, 420));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,6 +157,11 @@ public class admin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
             jTable3.getColumnModel().getColumn(4).setResizable(false);
@@ -154,7 +169,29 @@ public class admin extends javax.swing.JFrame {
             jTable3.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 370, 440));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 370, 450));
+
+        b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.png"))); // NOI18N
+        b.setText("jLabel3");
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bMouseClicked(evt);
+            }
+        });
+        getContentPane().add(b, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 40, 40));
+
+        jLabel3.setFont(new java.awt.Font("Quark", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("// ดับเบิ้ลคลิก เพื่อลบเมนู");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 570, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ex.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, 40, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/home.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -166,6 +203,55 @@ public class admin extends javax.swing.JFrame {
         admin_addmenu am = new admin_addmenu();
         am.setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        if (evt.getClickCount() == 2) {
+            int index = jTable3.getSelectedRow();
+            System.out.println("double clicked");
+            System.out.println(index);
+        }
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       if (evt.getClickCount() == 2) {
+            int index = jTable1.getSelectedRow();
+            System.out.println("double clicked");
+            System.out.println(index);
+            int idtd = (int) jTable1.getValueAt(index, 0);
+         
+            try {
+          Connection con = ConnectionBuilder.getConnection();
+          Statement stm = con.createStatement();
+            stm.executeUpdate("DELETE FROM Menu WHERE menu_id = '"+idtd+"';");
+            stm.close();
+            con.close();
+            System.out.println("Finnish");
+          
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (SQLException ex) {
+          Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void bMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bMouseClicked
+        home l;
+        try {
+            l = new home();
+             l.setVisible(true);
+        this.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_bMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -203,8 +289,11 @@ public class admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel b;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
