@@ -63,8 +63,10 @@ public class home extends javax.swing.JFrame {
                     
                 }
             }
-           
-            
+           if(s1.isSelected()){
+               
+           }
+          
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -108,6 +110,15 @@ public class home extends javax.swing.JFrame {
         totalQ = new javax.swing.JLabel();
         FinQ = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        s1 = new javax.swing.JRadioButton();
+        s2 = new javax.swing.JRadioButton();
+        s3 = new javax.swing.JRadioButton();
+        s4 = new javax.swing.JRadioButton();
+        s5 = new javax.swing.JRadioButton();
+        s6 = new javax.swing.JRadioButton();
+        s7 = new javax.swing.JRadioButton();
+        s8 = new javax.swing.JRadioButton();
+        s9 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -246,6 +257,69 @@ public class home extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 40, 40));
 
+        s1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+
+        s2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+
+        s3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
+
+        s4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, -1, -1));
+
+        s5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
+
+        s6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, -1));
+
+        s7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
+
+        s8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+
+        s9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                s9ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(s9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home/BG.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setMinimumSize(new java.awt.Dimension(800, 600));
@@ -264,11 +338,48 @@ public class home extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
        home_popup hp = new home_popup();
        hp.setVisible(true);
+      
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void s1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s1ActionPerformed
+
+    private void s2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s2ActionPerformed
+
+    private void s3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s3ActionPerformed
+
+    private void s4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s4ActionPerformed
+
+    private void s5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s5ActionPerformed
+
+    private void s6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s6ActionPerformed
+
+    private void s7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s7ActionPerformed
+
+    private void s8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s8ActionPerformed
+
+    private void s9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_s9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,6 +446,15 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel p7;
     private javax.swing.JLabel p8;
     private javax.swing.JLabel p9;
+    private javax.swing.JRadioButton s1;
+    private javax.swing.JRadioButton s2;
+    private javax.swing.JRadioButton s3;
+    private javax.swing.JRadioButton s4;
+    private javax.swing.JRadioButton s5;
+    private javax.swing.JRadioButton s6;
+    private javax.swing.JRadioButton s7;
+    private javax.swing.JRadioButton s8;
+    private javax.swing.JRadioButton s9;
     private javax.swing.JLabel totalQ;
     // End of variables declaration//GEN-END:variables
 }
