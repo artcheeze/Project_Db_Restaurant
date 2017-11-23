@@ -6,11 +6,13 @@
 package Class;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,25 +26,33 @@ public class emp_popup extends javax.swing.JFrame {
      */
     public emp_popup() {
         initComponents();
-        
-          Connection con;
-          System.out.println(util.getTI());
+        AddRow();
+
+        this.setLocationRelativeTo(null);
+
+    }
+
+    public void AddRow() {
+
+        Connection con;
+        System.out.println(util.getTI());
         try {
             con = ConnectionBuilder.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("Select od.indexs,od.order_id,m.price From Orders_detail od "
                     + " Join Menu m on m.menu_id = od.menu_id "
-                    + " where order_id ="+util.getTI()+"");
-           DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    + " where order_id =" + util.getTI() + "");
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
             Object rowData[] = new Object[3];
             while (rs.next()) {
-                 rowData[0] = rs.getInt("indexs");
+                rowData[0] = rs.getInt("indexs");
                 rowData[1] = rs.getInt("order_id");
                 rowData[2] = rs.getString("price");
-               
+
                 model.addRow(rowData);
             }
-            
+
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -51,8 +61,11 @@ public class emp_popup extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        this.setLocationRelativeTo(null);
+    }
+
+    public void remRow() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
     }
 
     /**
@@ -71,6 +84,7 @@ public class emp_popup extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,16 +136,47 @@ public class emp_popup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             int index = jTable1.getSelectedRow();
             System.out.println("double clicked");
             System.out.println(index);
+            System.out.println(util.getTI());
             int id = (int) jTable1.getValueAt(index, 0);
-            String fn = (String) jTable1.getValueAt(index, 1);
-            String t = (String) jTable1.getValueAt(index, 2);
-            
-           
-            
+            try {
+                Connection con = ConnectionBuilder.getConnection();
+                Statement stm = con.createStatement();
+                 Statement stm2 = con.createStatement();
+                ResultSet rs = stm.executeQuery("Select * FROM Orders od Join Orders_detail odd On od.order_id = odd.order_id WHERE od.order_id = "+util.getTI()+";");
+                ResultSet ra = stm2.executeQuery("Select * From Menu Where menu_id = (select menu_id from Orders_detail where indexs = " + id + ")");
+                int orderID = 0;
+                float p = 0;
+                Date d = null;
+                String foodname="";
+                while(rs.next()){
+                   orderID = rs.getInt("order_id");
+                   d = rs.getDate("date");
+                    //empppppppppppppppppppp
+
+                }
+                while(ra.next()){
+                     p = ra.getFloat("price");
+                    foodname = ra.getString("foodname");
+                }
+                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_id,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+1+"','"+"Finnish"+"')");
+                stm.executeUpdate("DELETE FROM Orders_detail WHERE indexs = '" + id + "';");
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.fireTableDataChanged();
+                stm.close();
+                con.close();
+                System.out.println("Finnish");
+                remRow();
+                AddRow();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -144,7 +189,35 @@ public class emp_popup extends javax.swing.JFrame {
     }//GEN-LAST:event_bMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
+
+        System.out.println("double clicked");
+        int count = jTable1.getModel().getRowCount();
+
+        if (count == 0) {
+
+            try {
+                Connection con = ConnectionBuilder.getConnection();
+                Statement stm = con.createStatement();
+                System.out.println(util.getTI());               
+                stm.executeUpdate("UPDATE Orders SET status = 1 WHERE order_id = '" + util.getTI() + "'");
+
+                stm.close();
+                con.close();
+                System.out.println("Finnish");
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Must finish all, Before ending !!");
+        }
+
+        Employee l;
+        l = new Employee();
+        l.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**

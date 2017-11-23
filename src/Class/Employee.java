@@ -25,13 +25,19 @@ public class Employee extends javax.swing.JFrame {
     public Employee() {
         initComponents();
         this.setLocationRelativeTo(null);
+        addRow();
         
         
-             Connection con;
+             
+        
+        
+    }
+    public void addRow(){
+        Connection con;
         try {
             con = ConnectionBuilder.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select * From Orders");
+            ResultSet rs = stm.executeQuery("Select * From Orders Where status = 0");
            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object rowData[] = new Object[3];
             while (rs.next()) {
@@ -49,8 +55,10 @@ public class Employee extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+    }
+    public void remRow() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
     }
 
     /**
@@ -146,8 +154,10 @@ public class Employee extends javax.swing.JFrame {
             System.out.println(index);
             int id = (int) jTable1.getValueAt(index, 0);
             util.setTI(id);
+            System.out.println(util.getTI());
             emp_popup ep = new emp_popup();
             ep.setVisible(true);
+            this.setVisible(false);
             
         }
     }//GEN-LAST:event_jTable1MouseClicked

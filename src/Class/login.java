@@ -23,7 +23,7 @@ public class login extends javax.swing.JFrame {
      * Creates new form login
      */
     public login() {
-          
+
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -104,37 +104,93 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_uActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-      if(u.getText().equalsIgnoreCase("admin")){
-          String pwd = new String(p.getPassword());
-          String res="";
-          try {
-              Connection con;
-            con = ConnectionBuilder.getConnection();
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select * From Employee where username = 'admin'");
-            while(rs.next()){
-                res = rs.getString("password");
+        if (u.getText().equalsIgnoreCase("admin")) {
+            String pwd = new String(p.getPassword());
+            String res = "";
+            try {
+                Connection con;
+                con = ConnectionBuilder.getConnection();
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("Select * From Employee where username = 'admin'");
+                while (rs.next()) {
+                    res = rs.getString("password");
+                }
+
+                if (res.equalsIgnoreCase(pwd)) {
+                    admin am = new admin();
+                    home hm = new home();
+                    am.setVisible(true);
+                    hm.setVisible(false);
+                    this.setVisible(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not Correct.");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            if(res.equalsIgnoreCase(pwd)){
-                admin am = new admin();
-                home hm = new home();
-                am.setVisible(true);
-                hm.setVisible(false);
-                this.setVisible(false);
-                
-                
+        } else if (u.getText().equalsIgnoreCase("user1")) {
+            String pwd = new String(p.getPassword());
+            String res = "";
+            try {
+                Connection con;
+                con = ConnectionBuilder.getConnection();
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("Select * From Employee where username Like 'user1'");
+                while (rs.next()) {
+                    res = rs.getString("password");
+                }
+
+                if (res.equalsIgnoreCase(pwd)) {
+                    Employee am = new Employee();
+                    home hm = new home();
+                    am.setVisible(true);
+                    hm.setVisible(false);
+                    this.setVisible(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not Correct.");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Not Correct.");
+        }
+        else if (u.getText().equalsIgnoreCase("user2")) {
+            String pwd = new String(p.getPassword());
+            String res = "";
+            try {
+                Connection con;
+                con = ConnectionBuilder.getConnection();
+                Statement stm = con.createStatement();
+                ResultSet rs = stm.executeQuery("Select * From Employee where username Like 'user2'");
+                while (rs.next()) {
+                    res = rs.getString("password");
+                }
+
+                if (res.equalsIgnoreCase(pwd)) {
+                    Employee am = new Employee();
+                    home hm = new home();
+                    am.setVisible(true);
+                    hm.setVisible(false);
+                    this.setVisible(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not Correct.");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-              
-          } catch (SQLException ex) {
-              Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-          } catch (ClassNotFoundException ex) {
-              Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
+        }
+        
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
