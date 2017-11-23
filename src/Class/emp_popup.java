@@ -140,7 +140,8 @@ public class emp_popup extends javax.swing.JFrame {
             int index = jTable1.getSelectedRow();
             System.out.println("double clicked");
             System.out.println(index);
-            System.out.println(util.getTI());     
+            System.out.println(util.getTI());
+            
             int id = (int) jTable1.getValueAt(index, 0);
             try {
                 Connection con = ConnectionBuilder.getConnection();
@@ -164,7 +165,7 @@ public class emp_popup extends javax.swing.JFrame {
                      p = ra.getFloat("price");
                     foodname = ra.getString("foodname");
                 }
-                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_id,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+util.getUn()+"','"+"Finnish"+"')");
+                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_user,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+util.getUn()+"','"+"Finnish"+"')");
                 stm.executeUpdate("DELETE FROM Orders_detail WHERE indexs = '" + id + "';");
                 
                 stm.close();
