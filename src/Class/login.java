@@ -145,6 +145,7 @@ public class login extends javax.swing.JFrame {
                 }
 
                 if (res.equalsIgnoreCase(pwd)) {
+                    util.setUn("user1");
                     Employee am = new Employee();
                     home hm = new home();
                     am.setVisible(true);
@@ -174,6 +175,7 @@ public class login extends javax.swing.JFrame {
                 }
 
                 if (res.equalsIgnoreCase(pwd)) {
+                    util.setUn("user2");
                     Employee am = new Employee();
                     home hm = new home();
                     am.setVisible(true);

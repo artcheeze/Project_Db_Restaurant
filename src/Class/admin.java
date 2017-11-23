@@ -24,17 +24,14 @@ public class admin extends javax.swing.JFrame {
     /**
      * Creates new form admin
      */
-    public admin() {
-          
-        initComponents();
-        this.setLocationRelativeTo(null);
-        //-----------------------------------------------------------------------------------------------------------------
-            Connection con;
-        try {
+    public void addRow1(){
+         try { 
+              Connection con;
             con = ConnectionBuilder.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("Select * From Menu");
            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+         
             Object rowData[] = new Object[3];
             while (rs.next()) {
                 rowData[0] = rs.getInt("menu_id");
@@ -42,7 +39,7 @@ public class admin extends javax.swing.JFrame {
                 rowData[2] = rs.getFloat("price");
                 model.addRow(rowData);
             }
-            
+  
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -51,12 +48,15 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //-----------------------------------------------------------------------------------------------------------------
+    }
+    public void addRow2(){
          try {
+             Connection con;
             con = ConnectionBuilder.getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("Select * From Employee");
            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        
             Object rowData[] = new Object[7];
             while (rs.next()) {
                 rowData[0] = rs.getInt("emp_id");
@@ -69,6 +69,7 @@ public class admin extends javax.swing.JFrame {
                 model.addRow(rowData);
             }
             
+            
             stm.close();
             con.close();
             System.out.println("Finnish");
@@ -77,6 +78,20 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void remRow() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+    }
+    public admin() {
+          
+        initComponents();
+        this.setLocationRelativeTo(null);
+        //-----------------------------------------------------------------------------------------------------------------
+            addRow1();
+       
+        //-----------------------------------------------------------------------------------------------------------------
+             addRow2();
     }
 
     /**
@@ -96,6 +111,7 @@ public class admin extends javax.swing.JFrame {
         b = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -193,6 +209,14 @@ public class admin extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, 40, 40));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/his/b-his.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/home.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -202,6 +226,7 @@ public class admin extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         admin_addmenu am = new admin_addmenu();
         am.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
@@ -223,13 +248,15 @@ public class admin extends javax.swing.JFrame {
             try {
           Connection con = ConnectionBuilder.getConnection();
           Statement stm = con.createStatement();
-            stm.executeUpdate("DELETE foodname,price FROM Menu WHERE menu_id = '"+idtd+"';");
+          
+            stm.executeUpdate("DELETE Menu FROM Menu WHERE menu_id = '"+idtd+"';");
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.fireTableDataChanged();
             stm.close();
             con.close();
             System.out.println("Finnish");
-          
+            remRow();
+            addRow1();
       } catch (ClassNotFoundException ex) {
           Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
       } catch (SQLException ex) {
@@ -255,6 +282,12 @@ public class admin extends javax.swing.JFrame {
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        his h = new his();
+        h.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,6 +329,7 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

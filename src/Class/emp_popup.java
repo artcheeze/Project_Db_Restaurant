@@ -140,12 +140,14 @@ public class emp_popup extends javax.swing.JFrame {
             int index = jTable1.getSelectedRow();
             System.out.println("double clicked");
             System.out.println(index);
-            System.out.println(util.getTI());
+            System.out.println(util.getTI());     
             int id = (int) jTable1.getValueAt(index, 0);
             try {
                 Connection con = ConnectionBuilder.getConnection();
                 Statement stm = con.createStatement();
-                 Statement stm2 = con.createStatement();
+                Statement stm2 = con.createStatement();
+               
+                
                 ResultSet rs = stm.executeQuery("Select * FROM Orders od Join Orders_detail odd On od.order_id = odd.order_id WHERE od.order_id = "+util.getTI()+";");
                 ResultSet ra = stm2.executeQuery("Select * From Menu Where menu_id = (select menu_id from Orders_detail where indexs = " + id + ")");
                 int orderID = 0;
@@ -162,10 +164,9 @@ public class emp_popup extends javax.swing.JFrame {
                      p = ra.getFloat("price");
                     foodname = ra.getString("foodname");
                 }
-                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_id,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+1+"','"+"Finnish"+"')");
+                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_id,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+util.getUn()+"','"+"Finnish"+"')");
                 stm.executeUpdate("DELETE FROM Orders_detail WHERE indexs = '" + id + "';");
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.fireTableDataChanged();
+                
                 stm.close();
                 con.close();
                 System.out.println("Finnish");
@@ -192,12 +193,14 @@ public class emp_popup extends javax.swing.JFrame {
 
         System.out.println("double clicked");
         int count = jTable1.getModel().getRowCount();
-
+        
         if (count == 0) {
 
             try {
                 Connection con = ConnectionBuilder.getConnection();
                 Statement stm = con.createStatement();
+               
+                
                 System.out.println(util.getTI());               
                 stm.executeUpdate("UPDATE Orders SET status = 1 WHERE order_id = '" + util.getTI() + "'");
 

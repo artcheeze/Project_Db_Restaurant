@@ -25,6 +25,7 @@ public class admin_addmenu extends javax.swing.JFrame {
      */
     public admin_addmenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -37,9 +38,7 @@ public class admin_addmenu extends javax.swing.JFrame {
     private void initComponents() {
 
         n = new javax.swing.JTextField();
-        id = new javax.swing.JTextField();
         p = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -49,17 +48,7 @@ public class admin_addmenu extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(n, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 110, -1));
-
-        id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
-            }
-        });
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 110, 20));
         getContentPane().add(p, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 110, -1));
-
-        jLabel2.setText("MenuID :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, -1, -1));
 
         jLabel3.setText("Name :");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
@@ -73,7 +62,7 @@ public class admin_addmenu extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 130, 40));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 130, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/add menu.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -81,37 +70,45 @@ public class admin_addmenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
-
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        int res = Integer.parseInt(id.getText());
-
        
+
+        int aa = 0;
         try {
-          Connection con = ConnectionBuilder.getConnection();
-          Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select * From Menu");
-            while(rs.next()){
-                int num = rs.getInt("menu_id");
-                if(num==res){
-                    JOptionPane.showMessageDialog(null, "Slot is not empty, Just remove before add it!");
+            Connection con = ConnectionBuilder.getConnection();
+            Statement stm = con.createStatement();
+           
+            ResultSet rs = stm.executeQuery("Select count(menu_id) As total From Menu");
+          
+            while (rs.next()) {
+                int num = rs.getInt("total");
+                aa = num + 1;
+                if (aa > 9) {
+                    JOptionPane.showMessageDialog(null, "Not Correct.");
+                    admin ee = new admin();
+                    ee.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                } else {
+                    stm.executeUpdate("INSERT INTO Menu(Menu_id,foodname,price) VALUES ('" + aa + "','" + n.getText() + "','" + p.getText() + "')");
+                    admin ee = new admin();
+                    ee.setVisible(true);
+                    this.setVisible(false);
                     break;
                 }
             }
-      
-            stm.executeUpdate("INSERT INTO Menu(Menu_id,foodname,price) VALUES ('"+id.getText()+"','"+n.getText()+"','"+p.getText()+"')");
-            
+
             stm.close();
             con.close();
             System.out.println("Finnish");
-          
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (SQLException ex) {
-          Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
-      }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
@@ -150,9 +147,7 @@ public class admin_addmenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

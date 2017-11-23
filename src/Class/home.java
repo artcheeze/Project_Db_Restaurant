@@ -119,6 +119,7 @@ public class home extends javax.swing.JFrame {
         s7 = new javax.swing.JRadioButton();
         s8 = new javax.swing.JRadioButton();
         s9 = new javax.swing.JRadioButton();
+        p10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,7 +155,6 @@ public class home extends javax.swing.JFrame {
 
         n3.setBackground(new java.awt.Color(255, 255, 255));
         n3.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        n3.setForeground(null);
         n3.setText("n3");
         getContentPane().add(n3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
@@ -171,7 +171,6 @@ public class home extends javax.swing.JFrame {
 
         n6.setBackground(new java.awt.Color(255, 255, 255));
         n6.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        n6.setForeground(null);
         n6.setText("n6");
         getContentPane().add(n6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
@@ -182,30 +181,26 @@ public class home extends javax.swing.JFrame {
 
         n8.setBackground(new java.awt.Color(255, 255, 255));
         n8.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        n8.setForeground(null);
         n8.setText("n8");
         getContentPane().add(n8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
         n9.setBackground(new java.awt.Color(255, 255, 255));
         n9.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        n9.setForeground(null);
         n9.setText("n9");
         getContentPane().add(n9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, -1));
 
         p1.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
         p1.setForeground(new java.awt.Color(255, 255, 255));
-        p1.setText("p1");
-        getContentPane().add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        p1.setText("Bath");
+        getContentPane().add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         p2.setBackground(new java.awt.Color(255, 255, 255));
         p2.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p2.setForeground(null);
         p2.setText("p2");
         getContentPane().add(p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         p3.setBackground(new java.awt.Color(255, 255, 255));
         p3.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p3.setForeground(null);
         p3.setText("p3");
         getContentPane().add(p3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
@@ -216,13 +211,11 @@ public class home extends javax.swing.JFrame {
 
         p5.setBackground(new java.awt.Color(255, 255, 255));
         p5.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p5.setForeground(null);
         p5.setText("p5");
         getContentPane().add(p5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         p6.setBackground(new java.awt.Color(255, 255, 255));
         p6.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p6.setForeground(null);
         p6.setText("p6");
         getContentPane().add(p6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
 
@@ -233,13 +226,11 @@ public class home extends javax.swing.JFrame {
 
         p8.setBackground(new java.awt.Color(255, 255, 255));
         p8.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p8.setForeground(null);
         p8.setText("p9");
         getContentPane().add(p8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
         p9.setBackground(new java.awt.Color(255, 255, 255));
         p9.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
-        p9.setForeground(null);
         p9.setText("p8");
         getContentPane().add(p9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
 
@@ -319,6 +310,11 @@ public class home extends javax.swing.JFrame {
             }
         });
         getContentPane().add(s9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
+
+        p10.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
+        p10.setForeground(new java.awt.Color(255, 255, 255));
+        p10.setText("p1");
+        getContentPane().add(p10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home/BG.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -438,6 +434,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel n8;
     private javax.swing.JLabel n9;
     private javax.swing.JLabel p1;
+    private javax.swing.JLabel p10;
     private javax.swing.JLabel p2;
     private javax.swing.JLabel p3;
     private javax.swing.JLabel p4;
