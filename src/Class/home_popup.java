@@ -287,12 +287,13 @@ public class home_popup extends javax.swing.JFrame {
             stm.executeUpdate("DELETE FROM temp");
             stm.close();
             
-            con.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
+            con.close();
             home ap = new home();
             ap.setVisible(true);
             this.setVisible(false);
