@@ -5,13 +5,20 @@
  */
 package Class;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import static java.sql.JDBCType.INTEGER;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +27,13 @@ import javax.swing.JOptionPane;
  */
 public class admin_addmenu extends javax.swing.JFrame {
 
+    
+
     /**
      * Creates new form admin_addmenu
      */
     public admin_addmenu() {
+        
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -42,9 +52,14 @@ public class admin_addmenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        b = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        namepic = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(n, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 110, -1));
@@ -62,7 +77,40 @@ public class admin_addmenu extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 130, 40));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 130, 40));
+
+        jButton1.setText("Select Image");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
+
+        b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.png"))); // NOI18N
+        b.setText("jLabel3");
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bMouseClicked(evt);
+            }
+        });
+        getContentPane().add(b, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 40, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ex.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 40, 40));
+
+        namepic.setText("name");
+        getContentPane().add(namepic, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin/add menu.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -71,15 +119,13 @@ public class admin_addmenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-       
 
         int aa = 0;
         try {
-            Connection con = ConnectionBuilder.getConnection();
-            Statement stm = con.createStatement();
-           
+            Connection con = ConnectionBuilder.getConnection(); 
+            Statement stm = con.createStatement();   
             ResultSet rs = stm.executeQuery("Select count(menu_id) As total From Menu");
-          
+           
             while (rs.next()) {
                 int num = rs.getInt("total");
                 aa = num + 1;
@@ -90,7 +136,10 @@ public class admin_addmenu extends javax.swing.JFrame {
                     this.setVisible(false);
                     break;
                 } else {
-                    stm.executeUpdate("INSERT INTO Menu(Menu_id,foodname,price) VALUES ('" + aa + "','" + n.getText() + "','" + p.getText() + "')");
+                    util.uploadImage(aa,n.getText(),p.getText());
+                    //stm.executeUpdate("INSERT INTO Menu(Menu_id,foodname,price) VALUES ('" + aa + "','" + n.getText() + "','" + p.getText() + "')");             
+                   
+
                     admin ee = new admin();
                     ee.setVisible(true);
                     this.setVisible(false);
@@ -106,10 +155,37 @@ public class admin_addmenu extends javax.swing.JFrame {
             Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
 
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void bMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bMouseClicked
+        admin a = new admin();
+        a.setVisible(true);
+        this.setVisible(false);
+
+
+    }//GEN-LAST:event_bMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        namepic.setText(selectedFile.getName());
+        util.putfile(selectedFile);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,11 +223,15 @@ public class admin_addmenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel b;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField n;
+    private javax.swing.JLabel namepic;
     private javax.swing.JTextField p;
     // End of variables declaration//GEN-END:variables
 }

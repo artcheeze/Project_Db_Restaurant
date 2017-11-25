@@ -6,6 +6,7 @@
 package Class;
 
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -276,6 +277,8 @@ public class admin extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
        

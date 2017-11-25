@@ -5,6 +5,7 @@
  */
 package Class;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -143,6 +144,8 @@ public class Employee extends javax.swing.JFrame {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_bMouseClicked

@@ -11,13 +11,20 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -30,6 +37,7 @@ public static int tempID=0;
 public static int tempID2=0;
 public static String tempUn="";
 public static String n1,n2,n3,n4,n5,n6,n7,n8,n9="";
+public static File ff;
 
 
 
@@ -192,6 +200,64 @@ public static String getUn(){
   
   
   
+  }
+  
+  public static void putfile(File f){
+      ff = f;
+  }
+  public static void uploadImage(int a,String b,String c){
+      float cc = Float.parseFloat(c);
+      try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://db.int203.phornlert.me:3306/gujarod","gujarod","susu");
+            
+          
+            FileInputStream fis=new FileInputStream(util.ff);
+            PreparedStatement ps=con.prepareStatement("INSERT INTO Menu(Menu_id,foodname,price,pic) values(?,?,?,?)"); 
+            ps.setInt(1,a);
+            ps.setString(2,b);
+            ps.setFloat(3,cc);
+            ps.setBinaryStream(4,fis,(int)ff.length());
+            ps.executeUpdate();
+ 
+            ps.close();
+            fis.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+  }
+  
+  public static ImageIcon getImage(int a){
+            try{
+           Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://db.int203.phornlert.me:3306/gujarod","gujarod","susu");
+            
+            File file=new File("E:\\pic"+a+".jpg");
+            FileOutputStream fos=new FileOutputStream(file);
+            byte b[];
+            Blob blob;
+            
+            PreparedStatement ps=con.prepareStatement("select * from Menu where menu_id = "+a+""); 
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                blob=rs.getBlob("pic");
+                b=blob.getBytes(1,(int)blob.length());
+                fos.write(b);
+            }
+            
+            ps.close();
+            fos.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+      
+           ImageIcon im = new ImageIcon("E:\\pic"+a+".jpg");
+      
+      return im;
+      
   }
 }
   
