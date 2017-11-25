@@ -127,7 +127,7 @@ public class home extends javax.swing.JFrame {
             }
 
             stm.close();
-            con.close();
+           
             System.out.println("Finnish");
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -530,7 +530,7 @@ public class home extends javax.swing.JFrame {
             }
 
             stm.close();
-            con.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -545,7 +545,11 @@ public class home extends javax.swing.JFrame {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+     try {
+         con.close();
+     } catch (SQLException ex) {
+         Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked

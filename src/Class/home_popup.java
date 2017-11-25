@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ART
  */
 public class home_popup extends javax.swing.JFrame {
-    
+    Connection con = ConnectionBuilder.getConnection();
     
     
 
@@ -50,8 +50,7 @@ public class home_popup extends javax.swing.JFrame {
         float mon = 0;
 
         try {
-            Connection con;
-            con = ConnectionBuilder.getConnection();
+            
             Statement stm = con.createStatement();
             Statement stm2 = con.createStatement();
             Statement stm3 = con.createStatement();
@@ -99,7 +98,7 @@ public class home_popup extends javax.swing.JFrame {
             }
 
             jLabel3.setText("" + util.getTI2());
-            con.close();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(home_popup.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -254,7 +253,7 @@ public class home_popup extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         try {
-            Connection con = ConnectionBuilder.getConnection();
+           
             Statement stm = con.createStatement();
             stm.executeUpdate("DELETE FROM temp");
             home h = new home();
@@ -274,11 +273,11 @@ public class home_popup extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        Connection con;
+       
         int id = 0;
         
         try {
-            con = ConnectionBuilder.getConnection();
+          
             Statement stm = con.createStatement();
             stm.executeUpdate("INSERT INTO Orders(order_id,totalprice,date,status,pro_id) VALUES(" + util.getTI2() + "," + sum1 + ",'"+ dateFormat.format(date) + "'," + 0 + "," + pro + ")");
             for (int i = 0; i != numOfT; i++) {
@@ -287,14 +286,12 @@ public class home_popup extends javax.swing.JFrame {
             }
             stm.executeUpdate("DELETE FROM temp");
             stm.close();
+            
             con.close();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             home ap = new home();
             ap.setVisible(true);
