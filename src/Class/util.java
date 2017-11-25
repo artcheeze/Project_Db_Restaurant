@@ -233,7 +233,7 @@ public static String getUn(){
            Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://db.int203.phornlert.me:3306/gujarod","gujarod","susu");
             
-            File file=new File("E:\\pic"+a+".jpg");
+            File file=new File("D:\\pic"+a+".jpg");
             FileOutputStream fos=new FileOutputStream(file);
             byte b[];
             Blob blob;
@@ -254,7 +254,7 @@ public static String getUn(){
             e.printStackTrace();
         }
       
-           ImageIcon im = new ImageIcon("E:\\pic"+a+".jpg");
+           ImageIcon im = new ImageIcon("D:\\pic"+a+".jpg");
       
       return im;
       

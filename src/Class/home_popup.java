@@ -114,6 +114,7 @@ public class home_popup extends javax.swing.JFrame {
         System.out.println(sum);
         System.out.println(numOfT);
         if (numOfT <= 2) {
+            sum1 = sum;
             jLabel9.setText("No Discount!");
             jLabel4.setText("" + sum);
             pro = 0;
@@ -246,7 +247,6 @@ public class home_popup extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home/your order.png"))); // NOI18N
         jLabel1.setMaximumSize(null);
         jLabel1.setMinimumSize(null);
-        jLabel1.setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
         pack();
@@ -254,6 +254,9 @@ public class home_popup extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         try {
+            Connection con = ConnectionBuilder.getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate("DELETE FROM temp");
             home h = new home();
             h.setVisible(true);
             this.setVisible(false);

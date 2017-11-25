@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ART
  */
 public class home extends javax.swing.JFrame {
-
+ Connection con = ConnectionBuilder.getConnection();
     /**
      * Creates new form home
      */
@@ -31,7 +31,7 @@ public class home extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
        
-        Connection con;
+       
         try {
             int nn = 0;
             int nnn = 0;
@@ -40,7 +40,7 @@ public class home extends javax.swing.JFrame {
                 num[nn] = 0;
                 nn++;
             }
-            con = ConnectionBuilder.getConnection();
+            
             Statement stm = con.createStatement();
             Statement stm2 = con.createStatement();
             Statement stm3 = con.createStatement();
@@ -129,8 +129,6 @@ public class home extends javax.swing.JFrame {
             stm.close();
             con.close();
             System.out.println("Finnish");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -490,10 +488,10 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        Connection con;
+       
         int id = 0;
         try {
-            con = ConnectionBuilder.getConnection();
+          
             Statement stm = con.createStatement();
             Statement stm2 = con.createStatement();
 
@@ -533,8 +531,6 @@ public class home extends javax.swing.JFrame {
 
             stm.close();
             con.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
