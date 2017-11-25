@@ -10,6 +10,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,7 +26,11 @@ public class emp_popup extends javax.swing.JFrame {
     /**
      * Creates new form emp_popup
      */
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    java.util.Date date = new java.util.Date();
+
     public emp_popup() {
+
         initComponents();
         AddRow();
 
@@ -39,23 +45,46 @@ public class emp_popup extends javax.swing.JFrame {
         try {
             con = ConnectionBuilder.getConnection();
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("Select od.indexs,od.order_id,m.price From Orders_detail od "
+            ResultSet rs = stm.executeQuery("Select od.indexs,od.order_id,od.menu_id,dd.date From Orders_detail od "
                     + " Join Menu m on m.menu_id = od.menu_id "
-                    + " where order_id =" + util.getTI() + "");
+                    + " Join Orders dd on od.order_id = dd.order_id"
+                    + " where od.order_id =" + util.getTI() + "");
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
-            Object rowData[] = new Object[3];
+            Object rowData[] = new Object[4];
+            util.getF();
             while (rs.next()) {
                 rowData[0] = rs.getInt("indexs");
                 rowData[1] = rs.getInt("order_id");
-                rowData[2] = rs.getString("price");
+                if (rs.getInt("menu_id") == 1) {
+                    rowData[2] = util.getNameF(1);
+                } else if (rs.getInt("menu_id") == 2) {
+                    rowData[2] = util.getNameF(2);
+                } else if (rs.getInt("menu_id") == 3) {
+                    rowData[2] = util.getNameF(3);
+                } else if (rs.getInt("menu_id") == 4) {
+                    rowData[2] = util.getNameF(4);
+                } else if (rs.getInt("menu_id") == 5) {
+                    rowData[2] = util.getNameF(5);
+                } else if (rs.getInt("menu_id") == 6) {
+                    rowData[2] = util.getNameF(6);
+                } else if (rs.getInt("menu_id") == 7) {
+                    rowData[2] = util.getNameF(7);
+                } else if (rs.getInt("menu_id") == 8) {
+                    rowData[2] = util.getNameF(8);
+                } else if (rs.getInt("menu_id") == 9) {
+                    rowData[2] = util.getNameF(9);
+                }
+                rowData[3] = rs.getTimestamp("date");
 
                 model.addRow(rowData);
+
             }
 
             stm.close();
             con.close();
             System.out.println("Finnish");
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -141,33 +170,32 @@ public class emp_popup extends javax.swing.JFrame {
             System.out.println("double clicked");
             System.out.println(index);
             System.out.println(util.getTI());
-            
+
             int id = (int) jTable1.getValueAt(index, 0);
             try {
                 Connection con = ConnectionBuilder.getConnection();
                 Statement stm = con.createStatement();
                 Statement stm2 = con.createStatement();
-               
-                
-                ResultSet rs = stm.executeQuery("Select * FROM Orders od Join Orders_detail odd On od.order_id = odd.order_id WHERE od.order_id = "+util.getTI()+";");
+
+                ResultSet rs = stm.executeQuery("Select * FROM Orders od Join Orders_detail odd On od.order_id = odd.order_id WHERE od.order_id = " + util.getTI() + ";");
                 ResultSet ra = stm2.executeQuery("Select * From Menu Where menu_id = (select menu_id from Orders_detail where indexs = " + id + ")");
                 int orderID = 0;
                 float p = 0;
                 Date d = null;
-                String foodname="";
-                while(rs.next()){
-                   orderID = rs.getInt("order_id");
-                   d = rs.getDate("date");
+                String foodname = "";
+                while (rs.next()) {
+                    orderID = rs.getInt("order_id");
+                    d = rs.getDate("date");
                     //empppppppppppppppppppp
 
                 }
-                while(ra.next()){
-                     p = ra.getFloat("price");
+                while (ra.next()) {
+                    p = ra.getFloat("price");
                     foodname = ra.getString("foodname");
                 }
-                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_user,status) VALUES ('" + orderID + "','" +foodname+ "','" + p + "','" + d + "','"+util.getUn()+"','"+"Finnish"+"')");
+                stm.executeUpdate("INSERT INTO History(order_id,foodname,price,date_time,emp_user,status) VALUES ('" + orderID + "','" + foodname + "','" + p + "','" + dateFormat.format(date) + "','" + util.getUn() + "','" + "Finnish" + "')");
                 stm.executeUpdate("DELETE FROM Orders_detail WHERE indexs = '" + id + "';");
-                
+
                 stm.close();
                 con.close();
                 System.out.println("Finnish");
@@ -194,21 +222,24 @@ public class emp_popup extends javax.swing.JFrame {
 
         System.out.println("double clicked");
         int count = jTable1.getModel().getRowCount();
-        
+
         if (count == 0) {
 
             try {
                 Connection con = ConnectionBuilder.getConnection();
                 Statement stm = con.createStatement();
-               
-                
-                System.out.println(util.getTI());               
+
+                System.out.println(util.getTI());
                 stm.executeUpdate("UPDATE Orders SET status = 1 WHERE order_id = '" + util.getTI() + "'");
 
                 stm.close();
                 con.close();
                 System.out.println("Finnish");
-                
+                Employee l;
+                l = new Employee();
+                l.setVisible(true);
+                this.setVisible(false);
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -218,10 +249,7 @@ public class emp_popup extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Must finish all, Before ending !!");
         }
 
-        Employee l;
-        l = new Employee();
-        l.setVisible(true);
-        this.setVisible(false);
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**

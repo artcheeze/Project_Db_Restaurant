@@ -257,6 +257,8 @@ public class admin extends javax.swing.JFrame {
             System.out.println("Finnish");
             remRow();
             addRow1();
+            stm.close();
+            con.close();
       } catch (ClassNotFoundException ex) {
           Logger.getLogger(util.class.getName()).log(Level.SEVERE, null, ex);
       } catch (SQLException ex) {

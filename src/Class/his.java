@@ -40,7 +40,7 @@ public class his extends javax.swing.JFrame {
                 rowData[1] = rs.getInt("order_id");
                 rowData[2] = rs.getString("foodname");
                 rowData[3] = rs.getFloat("price");
-                rowData[4] = rs.getDate("date_time");
+                rowData[4] = rs.getTimestamp("date_time");
                 rowData[5] = rs.getString("emp_user");
                 rowData[6] = rs.getString("status");
                 model.addRow(rowData);

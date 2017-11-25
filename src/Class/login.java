@@ -118,15 +118,16 @@ public class login extends javax.swing.JFrame {
 
                 if (res.equalsIgnoreCase(pwd)) {
                     admin am = new admin();
-                    home hm = new home();
+                   
                     am.setVisible(true);
-                    hm.setVisible(false);
+                   
                     this.setVisible(false);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Not Correct.");
                 }
-
+                stm.close();
+            con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -147,15 +148,16 @@ public class login extends javax.swing.JFrame {
                 if (res.equalsIgnoreCase(pwd)) {
                     util.setUn("user1");
                     Employee am = new Employee();
-                    home hm = new home();
+                   
                     am.setVisible(true);
-                    hm.setVisible(false);
+                
                     this.setVisible(false);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Not Correct.");
                 }
-
+                stm.close();
+            con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -177,15 +179,16 @@ public class login extends javax.swing.JFrame {
                 if (res.equalsIgnoreCase(pwd)) {
                     util.setUn("user2");
                     Employee am = new Employee();
-                    home hm = new home();
+                   
                     am.setVisible(true);
-                    hm.setVisible(false);
+                   
                     this.setVisible(false);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Not Correct.");
                 }
-
+                 stm.close();
+            con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

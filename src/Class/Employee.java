@@ -43,7 +43,7 @@ public class Employee extends javax.swing.JFrame {
             while (rs.next()) {
                 rowData[0] = rs.getInt("order_id");
                 rowData[1] = rs.getString("totalprice");
-                rowData[2] = rs.getDate("date");
+                rowData[2] = rs.getTimestamp("date");
                 model.addRow(rowData);
             }
             

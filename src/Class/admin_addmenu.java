@@ -84,7 +84,7 @@ public class admin_addmenu extends javax.swing.JFrame {
                 int num = rs.getInt("total");
                 aa = num + 1;
                 if (aa > 9) {
-                    JOptionPane.showMessageDialog(null, "Not Correct.");
+                    JOptionPane.showMessageDialog(null, "Full!!!");
                     admin ee = new admin();
                     ee.setVisible(true);
                     this.setVisible(false);
