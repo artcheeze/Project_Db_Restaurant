@@ -255,13 +255,13 @@ public class home extends javax.swing.JFrame {
         n7.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
         n7.setForeground(new java.awt.Color(255, 255, 255));
         n7.setText("null");
-        getContentPane().add(n7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, -1, -1));
+        getContentPane().add(n7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
 
         n8.setBackground(new java.awt.Color(255, 255, 255));
         n8.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
         n8.setForeground(new java.awt.Color(255, 255, 255));
         n8.setText("null");
-        getContentPane().add(n8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        getContentPane().add(n8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
         n9.setBackground(new java.awt.Color(255, 255, 255));
         n9.setFont(new java.awt.Font("Quark", 0, 18)); // NOI18N
